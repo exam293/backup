@@ -1,0 +1,132 @@
+.container {  display: grid;
+    grid-template-columns: 0.3fr 1fr 0.3fr 1fr 0.3fr 1fr 0.3fr;
+    grid-template-rows: 0.2fr 0.5fr 0.2fr 0.5fr 0.2fr 0.5fr 0.2fr 0.5fr 0.2fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      ". . . . . . ."
+      ". c1 . c2 . c3 ."
+      ". . . . . . ."
+      ". c4 . c5 . c6 ."
+      ". . . . . . ."
+      ". c7 . c8 . c9 ."
+      ". . . . . . ."
+      ". c10 . c11 . c12 ."
+      ". . . . . . .";
+  }
+  
+  .c1 { grid-area: c1; }
+  
+  .c2 { grid-area: c2; }
+  
+  .c3 { grid-area: c3; }
+  
+  .c4 { grid-area: c4; }
+  
+  .c5 { grid-area: c5; }
+  
+  .c6 { grid-area: c6; }
+  
+  .c7 { grid-area: c7; }
+  
+  .c8 { grid-area: c8; }
+  
+  .c9 { grid-area: c9; }
+  
+  .c10 { grid-area: c10; }
+  
+  .c11 { grid-area: c11; }
+  
+  .c12 { grid-area: c12; }
+  
+  
+  html, body , .container {
+    height: 100%;
+    margin: 0;
+  }
+  
+  
+  .container * {
+    border: 1px solid rgb(0, 0, 0);
+    position: relative;
+    text-align: center;
+    
+  }
+  
+  .container *:after {
+    
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+  }
+  
+.rounded {
+    border-radius: 0.6rem!important;
+}
+
+.title{
+  border: 1px solid rgb(255, 255, 255);
+  font-family: 'Oswald', sans-serif;
+  text-align: center;
+  border-radius: 0.6rem;
+  background-color: #274156;
+}
+
+.VM{
+    border: 0px solid black;
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+    padding-top: 15px;
+    padding-bottom: 2px;
+}
+
+a.vm:link{
+  border: 0px solid black;
+  text-align: center;
+  font-family: 'Raleway', sans-serif;
+  color: #274156;
+  text-decoration: none;
+}
+
+a.vm:visited{
+  border: 0px solid black;
+  text-align: center;
+  font-family: 'Raleway', sans-serif;
+  color: #274156;
+  text-decoration: none;
+}
+
+a.vm:hover{
+  border: 0px solid black;
+  text-align: center;
+  font-family: 'Raleway', sans-serif;
+  color: #274156;
+  text-decoration: none;
+}
+
+.progress-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  background-color: #1C6E8C;
+  transition: width .6s ease;
+}
+
+.tabs{
+  background-color: #605856;
+}
+
+.subject_img{
+  border: 1px solid #ddd;
+  border-radius: 0.6rem;
+  width: 89px;
+}
