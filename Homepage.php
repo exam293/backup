@@ -36,6 +36,18 @@
     </div>
 </nav> 
 
+<?php
+
+    session_start(); 
+    if(isset($_SESSION['subject'])) {
+        echo "Your session is running " . $_SESSION['subject'];
+      }
+
+    else{
+        echo "session not running" . $_SESSION['subject'];
+    }
+?>
+
 
 </body>
 </html>

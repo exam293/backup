@@ -1,0 +1,151 @@
+
+.container {  display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 3fr 1fr 0.4fr 1fr 1fr 1fr 1fr 0.4fr 0.5fr 0.4fr 1fr 1fr;
+    grid-auto-columns: 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      ". . . . . . ."
+      ". . title title title . ."
+      ". . . . . . ."
+      ". Content Content Content Content Content ."
+      ". Content Content Content Content Content ."
+      ". Content Content Content Content Content ."
+      ". Content Content Content Content Content ."
+      ". . . . . . ."
+      ". . progres progres c1 . ."
+      ". . . . . . ."
+      ". links links links links links ."
+      ". . . . . . .";
+  }
+  
+  .title { 
+    grid-area: title;
+    text-align: center;
+    border-radius: 0.35rem;
+    background-color: #274156;
+    
+}
+
+.Content { 
+  grid-area: Content;
+  font-family: 'Lato', sans-serif; 
+  border-radius: 0.6rem;
+}
+
+  .progres {
+      grid-area: progres;
+      border: 0px solid black!important;
+  }
+
+  .c1{
+      grid-area: c1;
+      border-left: 5px;
+      text-align: center;
+      border: 0px solid black!important;
+  }
+  
+  .links { grid-area: links; 
+    text-align: center;
+    border-radius: 0.6rem;
+    border: 0px solid black!important;}
+  
+  
+  html, body , .container {
+    height: 100%;
+    margin: 0;
+  }
+  
+  .container * {
+    border: 1px solid rgb(0, 0, 0);
+    position: relative;
+    
+  }
+  
+  .container *:after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+  }
+ 
+.h2, h2 {
+    font-size: calc(1.325rem + .9vw);
+    border: 0px solid black!important;
+    font-family: 'Merriweather', serif;
+    padding-top: 20px;
+}
+  
+.progress-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #1C6E8C;
+    transition: width .6s ease;
+  }
+
+  /* Popup container - can be anything you want */
+.popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* The actual popup */
+.popup .popuptext {
+  visibility: hidden;
+  width: 160px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;} 
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
