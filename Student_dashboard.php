@@ -13,7 +13,59 @@
     <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
     <title>Document</title>
     <?php 
+    include_once 'db.php';
+    include_once 'user.php';
+
     session_start();
+    $logged_in = false;
+    if (isset($_SESSION['user'])) {
+        $logged_in = true;
+        $user = unserialize($_SESSION['user']);
+    }
+
+    else{
+        header("Location: /Gibjohn/Student_login.php");
+    }
+
+    
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "gibjohn";
+    $Login_student_id = "1";
+    $progress = "";
+
+    //echo($user->email);
+    //echo($user->password)
+    
+
+
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+       
+    $sql = "SELECT student_id, first_name, last_name, email, password, status FROM student";
+    $result = $conn->query($sql);
+
+    while($row = $result->fetch_assoc()) {
+        $line = "<br>". $row["student_id"]. " ". $row["first_name"]. " " . $row["last_name"] ." ". $row["email"] ." ". $row["password"] ." ". $row["status"] . "<br>";
+        //echo" ";
+        $verify = password_verify($user->password, $row['password']);
+        //echo($row["password"]);
+        if ($row["email"] == $user->email && $verify == true){
+            $_SESSION['student_id'] = $row["student_id"];
+            $_SESSION['first_name'] = $row["first_name"];
+            $_SESSION['last_name'] = $row["last_name"];
+            $_SESSION['email'] = $row["email"];
+            $_SESSION['status'] = $row["status"];
+            //echo($_SESSION['student_id']." ".$_SESSION['first_name']." ".$_SESSION['last_name']." ".$_SESSION['email']." ".$_SESSION['status']);
+        }
+    }
+    
+
     function progress($course_name){
         
         
@@ -21,7 +73,7 @@
         $username = "root";
         $password = "";
         $dbname = "gibjohn";
-        $Login_student_id = "1";
+        $Login_student_id = $_SESSION['student_id'];
         $progress = "";
             
         // Create connection
@@ -116,6 +168,15 @@
         course($sub);
       }
     ?>
+    <?php 
+    if (array_key_exists('Logout',$_POST)) {
+        header("Location: /Gibjohn/logout.php");
+    }
+
+    else if (array_key_exists('Login',$_POST)) {
+        header("Location: /Gibjohn/Tutor_student.php");
+    }
+    ?>
 </head>
 <body>
     
@@ -133,7 +194,24 @@
                     <a class="nav-link" href="Contact.php">Contact Us</a>
                 </li>
             </ul>
-       
+            <form class="d-flex" method="post">
+                <?php 
+                    if ($logged_in):
+                ?>
+                
+                <p>
+                    Hello, (name) <input type="submit" class="btn btn-primary" name="Logout" id="Logout" value="Logout">
+                </p>
+                
+                <?php
+                    else: 
+                ?>
+                <p>
+                    <input type="submit" class="btn btn-primary" name="Login" id="Login" value="Login">
+                </p>
+                
+                <?php endif ?>
+            </form>
         </div>
     </div>
 </nav> 
@@ -380,7 +458,5 @@
         </div>
     </div>
 </div>
-<a href="Homepage.php">click me</a>
-
 </body>
 </html>

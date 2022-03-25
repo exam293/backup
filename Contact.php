@@ -11,6 +11,23 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
     <title>Document</title>
+    <?php
+
+        include_once 'db.php';
+        include_once 'user.php';
+
+        session_start();
+
+        $logged_in = false;
+        if (isset($_SESSION['user'])) {
+            $logged_in = true;
+            $user = unserialize($_SESSION['user']);
+}
+
+
+
+
+?>
 </head>
 <body>
     
@@ -27,11 +44,32 @@
                 <li class="nav-item">
                     <a class="nav-link" href="Contact.php">Contact Us</a>
                 </li>
+                <?php 
+                    if ($logged_in):
+                ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo($_SESSION['member_type']."_dashboard.php") ?>"><?php echo($_SESSION['member_type']." Dashboard") ?></a>
+                </li>
+                <?php endif ?>
             </ul>
-            <form class="d-flex" method="get" action="/Gibjohn/Tutor_student.php">
-                <button class="btn btn-primary" type="submit">Login</button>
+            <form class="d-flex" method="post">
+                <?php 
+                    if ($logged_in):
+                ?>
+                
+                <p style="color: white;">
+                    Hello, <?php echo $_SESSION['first_name'] ?> <input type="submit" class="btn btn-primary" name="Logout" id="Logout" value="Logout">
+                </p>
+                
+                <?php
+                    else: 
+                ?>
+                <p>
+                    <input type="submit" class="btn btn-primary" name="Login" id="Login" value="Login">
+                </p>
+                
+                <?php endif ?>
             </form>
-       
         </div>
     </div>
 </nav> 

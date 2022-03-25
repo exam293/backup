@@ -20,7 +20,7 @@ class user {
 
     function insert() {
         $sql = "
-        Insert INTO student(
+        Insert INTO tutor(
             first_name,
             email,
             password,
@@ -45,8 +45,8 @@ class user {
 
     function authenticate() {
         $sql = "
-            SELECT student_id, first_name, email, password, status
-            FROM student
+            SELECT tutor_id, first_name, email, password, status
+            FROM tutor
             WHERE email=\"{$this->email}\";
             ";
         

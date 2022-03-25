@@ -7,17 +7,21 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="webstyle.css">
+    <link rel="stylesheet" href="LIP.css">
     <title>Document</title>
-<script>
-function Student_link()
-{
-     location.href = "Student_login.php";
-} 
-function Tutor_link()
-{
-     location.href = "Tutor_login.php";
-} 
-</script>
+<?php
+session_start();
+if (array_key_exists('student',$_POST)){
+    
+    header("location: /Gibjohn/student_login.php");
+}
+
+else if (array_key_exists('tutor',$_POST)){
+    
+    header("location: /Gibjohn/Tutor_login.php");
+}
+
+?>
 </head>
 <body>
     
@@ -47,10 +51,10 @@ function Tutor_link()
   <center>
     <h2>Hello, are you a student or tutor?</h2>
   </center>
-  <div class="d-grid gap-3">
-    <button class="btn btn-primary btn-block" type="button" onclick="Student_link()">Student</button>
-    <button class="btn btn-primary btn-block" type="button" onclick="Tutor_link()">Tutor</button>
-  </div>
+  <form class="pc1 rounded" style="border: 0px solid rgb(0, 0, 0);" method="post">
+        <input type="submit" class="btn btn-primary" name="student" id="student" value="Student"/>
+        <input type="submit" class="btn btn-primary" name="tutor" id="tutor" value="Tutor"/>
+    </form>
 </div>
 
 </body>

@@ -11,7 +11,7 @@
     <title>Document</title>
     <?php
     session_start();
-    $_SESSION['member_type'] = "Student";
+    $_SESSION['member_type'] = "Tutor";
     ?>
 </head>
 <body>
@@ -40,7 +40,7 @@
 
 <div class="container" style="padding: 50px; margin-top: 3em">
     <h1>Log In</h1>
-    <form action="S_login-action.php" method="post">
+    <form action="T_login-action.php" method="post">
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Email address</lable>
             <input name="email" type="email" class="form-control" id="exampleInputEmail1">
@@ -51,10 +51,10 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
         <div>
-            <a>New student?</a><a href="Student_sign-up.php" style="text-decoration: none;"> Start here.</a>
+            <a>New tutor?</a><a href="Tutor_sign-up.php" style="text-decoration: none;"> Start here.</a>
         </div>
         <div>
-            <a>If you are a tutor?</a><a href="Tutor_login.php" style="text-decoration: none;"> Click here.</a>
+            <a>If you are a student?</a><a href="Student_login.php" style="text-decoration: none;"> Click here.</a>
         </div>
 
     </form>

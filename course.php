@@ -17,12 +17,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
     <title>View More</title>
     
-
     <?php
-        session_start(); 
-        //echo $_SESSION['subject'];
+        include_once 'db.php';
+        include_once 'user.php';
         
-
+        session_start();
+        
+        $logged_in = false;
+        if (isset($_SESSION['user'])) {
+            $logged_in = true;
+            $user = unserialize($_SESSION['user']);
+        }
+        
         function title(){ 
             if ($_SESSION['subject'] == "maths"){
                 echo("Mathmatics");
@@ -72,6 +78,55 @@
                 echo("Computing");
             }
         }
+        function content_height(){
+            if ($_SESSION['subject'] == "maths"){
+                echo("Mathmatics");
+            }
+
+            else if ($_SESSION['subject'] == "science"){
+                echo("Science");
+            }
+
+            else if ($_SESSION['subject'] == "english"){
+                echo("English");
+            }
+
+            else if ($_SESSION['subject'] == "history"){
+                echo("History");
+            }
+
+            else if ($_SESSION['subject'] == "geography"){
+                echo(strval(31*24)."px");
+            }
+
+            else if ($_SESSION['subject'] == "mfl"){
+                echo("Modern Foreign Languages");
+            }
+
+            else if ($_SESSION['subject'] == "dt"){
+                echo("Design and Technology");
+            }
+
+            else if ($_SESSION['subject'] == "ad"){
+                echo("Art and Design");
+            }
+
+            else if ($_SESSION['subject'] == "music"){
+                echo("Music");
+            }
+
+            else if ($_SESSION['subject'] == "pe"){
+                echo("Physical Education");
+            }
+
+            else if ($_SESSION['subject'] == "citizenship"){
+                echo("Citizenship");
+            }
+
+            else if ($_SESSION['subject'] == "computing"){
+                echo("Computing");
+            }
+        }
 
         function content(){ 
             $line_number = 0;
@@ -90,9 +145,7 @@
             
         }
 
-        function content_height(){
-            echo $_SESSION['content_height'];
-        }
+        
 
         function progress($course_name){
         
@@ -101,7 +154,7 @@
             $username = "root";
             $password = "";
             $dbname = "gibjohn";
-            $Login_student_id = "1";
+            $Login_student_id = $_SESSION['student_id'];
             $progress = "";
                 
             // Create connection
@@ -160,23 +213,23 @@
             }
 
             else if ($_SESSION['subject'] == "ad"){
-                echo("Art and Design");
+                echo("20% - To use a range of techniques to record their observations in sketchbooks, journals andother media as a basis for exploring their ideas, 40% - To use a range of techniques and media, including painting, 60% - to increase their proficiency in the handling of different materials, 80% - To analyse and evaluate their own work, and that of others, in order to strengthen the visual impact or applications of their work, 100% - About the history of art, craft, design and architecture, including periods, styles and major movements from ancient times up to the present day");
             }
 
             else if ($_SESSION['subject'] == "music"){
-                echo("Music");
+                echo("16% - Play and perform confidently in a range of solo and ensemble contexts using their voice, playing instruments musically, fluently and with accuracy and expression, 32% - Improvise and compose; and extend and develop musical ideas by drawing on a range of musical structures, styles, genres and traditions, 48% - Use staff and other relevant notations appropriately and accurately in a range of musical styles, genres and traditions, 64% - Identify and use the inter-related dimensions of music expressively and with increasing sophistication, including use of tonalities, different types of scales and other musical devices, 80% - Listen with increasing discrimination to a wide range of music from great composers and musicians, 100% - Develop a deepening understanding of the music that they perform and to which the listen, and its history");
             }
 
             else if ($_SESSION['subject'] == "pe"){
-                echo("Physical Education");
+                echo("16% - Use a range of tactics and strategies to overcome opponents in direct competition through team and individual games [for example, badminton, basketball, cricket, football, hockey, netball, rounders, rugby and tennis], 32% - Develop their technique and improve their performance in other competitive sports [for example, athletics and gymnastics] , 48% - Perform dances using advanced dance techniques within a range of dance styles and forms, 64% - Take part in outdoor and adventurous activities which present intellectual and physical challenges and be encouraged to work in a team, building on trust and developing skills to solve problems, either individually or as a group, 80% - Analyse their performances compared to previous ones and demonstrate improvementto achieve their personal best, 100% - Take part in competitive sports and activities outside school through community links or sports clubs.");
             }
 
             else if ($_SESSION['subject'] == "citizenship"){
-                echo("Citizenship");
+                echo("16% - Energy, 32% - Motion and forces, 48% - Waves, 64% - Electricity and electromagnetism, 80% - Matter, 100% - Space physics");
             }
 
             else if ($_SESSION['subject'] == "computing"){
-                echo("Computing");
+                echo("11% - Design, use and evaluate computational abstractions that model the state and behaviour of real-world problems and physical systems, 22% - Understand several key algorithms that reflect computational thinking [for example, ones for sorting and searching]; use logical reasoning to compare the utility of alternative algorithms for the same problem, 33% - Use two or more programming languages, at least one of which is textual, to solve a variety of computational problems; make appropriate use of data structures [for example, lists, tables or arrays]; design and develop modular programs that use procedures or functions, 44% - Understand simple Boolean logic [for example, AND, OR and NOT] and some of its uses in circuits and programming; understand how numbers can be represented in binary, and be able to carry out simple operations on binary numbers [for example, binary addition, and conversion between binary and decimal] , 55% - Understand the hardware and software components that make up computer systems, and how they communicate with one another and with other systems, 66% - Understand how instructions are stored and executed within a computer system; understand how data of various types (including text, sounds and pictures) can berepresented and manipulated digitally, in the form of binary digits, 77% - Undertake creative projects that involve selecting, using, and combining multiple applications, preferably across a range of devices, to achieve challenging goals, including collecting and analysing data and meeting the needs of known users, 88% - Create, re-use, revise and re-purpose digital artefacts for a given audience, with attention to trustworthiness, design and usability, 100% - Understand a range of ways to use technology safely, respectfully, responsibly and securely, including protecting their online identity and privacy; recognise inappropriate content, contact and conduct and know how to report concerns.");
             }
         }
 
@@ -271,8 +324,32 @@
                 <li class="nav-item">
                     <a class="nav-link" href="Contact.php">Contact Us</a>
                 </li>
+                <?php 
+                    if ($logged_in):
+                ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo($_SESSION['member_type']."_dashboard.php") ?>"><?php echo($_SESSION['member_type']." Dashboard") ?></a>
+                </li>
+                <?php endif ?>
             </ul>
-       
+            <form class="d-flex" method="post">
+                <?php 
+                    if ($logged_in):
+                ?>
+                
+                <p style="color: white;">
+                    Hello, <?php echo $_SESSION['first_name'] ?> <input type="submit" class="btn btn-primary" name="Logout" id="Logout" value="Logout">
+                </p>
+                
+                <?php
+                    else: 
+                ?>
+                <p>
+                    <input type="submit" class="btn btn-primary" name="Login" id="Login" value="Login">
+                </p>
+                
+                <?php endif ?>
+            </form>
         </div>
     </div>
 </nav> 
